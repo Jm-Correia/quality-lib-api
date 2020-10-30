@@ -1,12 +1,8 @@
-import { Request, Response, Router } from 'express';
+import { Router } from 'express';
+import controller from '../../../modules/gitRepository/Controler/SearchRepositoryController';
 
 const routes = Router();
 
-routes.get('/', async (request: Request, response: Response) => {
-    const a = 12;
-
-    const b = a + 2;
-    return response.json(b);
-});
+routes.post('/search', controller.index);
 
 export default routes;
