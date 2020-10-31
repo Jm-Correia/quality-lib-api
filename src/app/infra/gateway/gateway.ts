@@ -1,8 +1,8 @@
 import 'dotenv/config';
 import { AxiosResponse } from 'axios';
 import { IGitHubProject, STATUS, IItem } from '../../model/repository';
-import api from '../../../../services/api';
-import AppError from '../../../error/AppError';
+import api from '../../services/api';
+import AppError from '../../error/AppError';
 
 export default class Gateway {
     private response: AxiosResponse;
@@ -41,6 +41,8 @@ export default class Gateway {
         openIssues,
     }: IGitHubProject): Promise<void> {
         try {
+            const pages = Math.ceil(openIssues / 100);
+            console.log(pages);
             const vetor = await Promise.all([
                 api.get(`/repos/${fullName}/issues`, {
                     params: {

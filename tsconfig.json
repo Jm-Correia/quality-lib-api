@@ -27,10 +27,10 @@
             "./node_modules/@types",
             "./src/@types"
         ],
-        "baseUrl": "./src", /* List of folders to include type definitions from. */
+        "baseUrl": "./src/", /* List of folders to include type definitions from. */
         "paths": {
-            "@modules/*": [
-                "/modules/*"
+            "@controllers/*": [
+                "app/controllers/*"
             ],
             "@main/*": [
                 "/main/*"
@@ -39,7 +39,7 @@
                 "/config/*"
             ],
             "@services": [
-                "/services/*"
+                "app/services/*"
             ]
         }
     }

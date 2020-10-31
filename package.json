@@ -4,7 +4,7 @@
     "main": "server.ts",
     "scripts": {
         "build": "tsc",
-        "dev:server": "ts-node-dev -r tsconfig-paths/register --respawn --ignore node_modules --no-notify src/main/server.ts"
+        "dev:server": "ts-node-dev --inspect -r tsconfig-paths/register --respawn --ignore node_modules --no-notify src/main/server.ts"
     },
     "repository": "https://github.com/Jm-Correia/quality-lib-api.git",
     "author": "JOÃO MARCOS CORREIA <joao.marcos.correia@gmail.com>",

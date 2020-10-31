@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import AppError from '../../error/AppError';
+import AppError from '../error/AppError';
 import Gateway from '../infra/gateway/gateway';
 
 class SearchRepositoryController {
@@ -9,7 +9,7 @@ class SearchRepositoryController {
         const gateway = new Gateway();
         const gitHubFullName = await gateway.listFullProjectName(project);
         await gateway.getItemsIssuesClose(gitHubFullName);
-        return response.json(gitHubFullName);
+        return response.json({ gitHubFullName });
     }
 }
 

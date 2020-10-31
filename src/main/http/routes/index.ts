@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import controller from '../../../modules/gitRepository/Controler/SearchRepositoryController';
+import controller from '@controllers/SearchRepositoryController';
 
 const routes = Router();
 

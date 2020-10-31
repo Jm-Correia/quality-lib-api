@@ -2,11 +2,11 @@ FROM node:12-alpine3.11
 
 WORKDIR /usr/app
 
-RUN npm install --global yarn
+RUN yarn -version
 
-RUN yarn -v
+COPY ./package.json WORKDIR
 
-COPY . WORKDIR
+RUN yarn
 
 EXPOSE 3005
 
