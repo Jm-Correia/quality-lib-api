@@ -1,19 +1,11 @@
 export interface IItem {
-    created_at: Date;
-    closed_at: Date;
+    differenceDays: number;
 }
 
 export interface IGitHubProject {
     fullName: string;
     openIssues: number;
-    avgAge?: number;
-    stdAge?: number;
+    averageDays?: number | 0;
+    standardDeviation?: number | 0;
     items?: Array<IItem>;
-}
-
-// eslint-disable-next-line no-shadow
-export enum STATUS {
-    open = 'open',
-    closed = 'closed',
-    create = 'create',
 }

@@ -35,11 +35,14 @@
             "@main/*": [
                 "/main/*"
             ],
+            "@infra/*": [
+                "app/infra/*"
+            ],
             "@config/*": [
                 "/config/*"
             ],
-            "@services": [
-                "app/services/*"
+            "@lib": [
+                "app/lib/*"
             ]
         }
     }
