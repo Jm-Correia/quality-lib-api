@@ -1,27 +1,45 @@
+/* eslint-disable no-restricted-syntax */
+import { parseISO } from 'date-fns';
 import { IItem } from '../model/GitProjectModel';
 import { ILineChart } from '../model/LineChart';
+import Util from './Utils.js';
 
 const alongTime = async (data: Array<IItem>): Promise<Array<ILineChart>> => {
     const items = data.reverse();
     const lineCharts: Array<ILineChart> = [];
-    let yearAux = 0;
-    let countIssuesAux = 0;
-
-    // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < items.length; i++) {
-        const item = items[i];
-        if (yearAux === 0) {
-            yearAux = item.year;
-        } else if (yearAux !== item.year) {
-            lineCharts.push({ x: yearAux, y: countIssuesAux });
-            yearAux = item.year;
-        } else {
-            countIssuesAux += 1;
-        }
+    const agrupados = Util(items, 'year');
+    // eslint-disable-next-line no-restricted-syntax
+    // eslint-disable-next-line guard-for-in
+    for (const year in agrupados) {
+        // eslint-disable-next-line no-console
+        // console.log(year, agrupados[year].length);
+        lineCharts.push({ year, issues: agrupados[year].length });
     }
+
     return lineCharts;
 };
 
-const dayOverDay = (data: IItem): Array<ILineChart> => { };
+const dayOverDay = async (
+    data: Array<IItem>,
+    dateStart,
+    dateEnd,
+): Promise<Array<ILineChart>> => {
+    const lineCharts: Array<ILineChart> = [];
+    const dtStart = parseISO(dateStart);
+    const dtEnd = parseISO(dateEnd);
+    const filterBetweenDates = value => {
+        return value.created_at >= dtStart && value.created_at <= dtEnd;
+    };
+    const items = data.filter(filterBetweenDates).reverse();
+
+    const reduzidos = Util(items, 'created_at');
+    // eslint-disable-next-line guard-for-in
+    for (const date in reduzidos) {
+        // eslint-disable-next-line no-console
+        // console.log(year, agrupados[year].length);
+        lineCharts.push({ year: date, issues: reduzidos[date].length });
+    }
+    return lineCharts;
+};
 
 export { alongTime, dayOverDay };

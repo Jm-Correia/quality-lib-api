@@ -1,18 +1,18 @@
 import { ILineChart } from '../model/LineChart';
 import GitProjectSchema from '../schemas/GitProject';
 import AppError from '../error/AppError';
-import { alongTime } from '../utils/chartUtil';
+import { alongTime, dayOverDay } from '../utils/chartUtil';
 
 interface IQueries {
     project: string;
-    dateBegin?: Date;
+    dateStart?: Date;
     dateEnd?: Date;
 }
 
 export default class StatisticLinearChartService {
     async execute({
         project,
-        dateBegin,
+        dateStart,
         dateEnd,
     }: IQueries): Promise<Array<ILineChart>> {
         const projectGitHub = await GitProjectSchema.findOne({
@@ -25,7 +25,9 @@ export default class StatisticLinearChartService {
                 404,
             );
         const { items }: any = projectGitHub;
-        console.log(`Count Items: ${items.length}`);
+        if (dateStart && dateEnd) {
+            return dayOverDay(items, dateStart, dateEnd);
+        }
 
         return alongTime(items);
     }

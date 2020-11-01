@@ -1,4 +1,10 @@
-import { getYear, getMonth, parseISO, differenceInDays } from 'date-fns';
+import {
+    getYear,
+    getMonth,
+    getDay,
+    parseISO,
+    differenceInDays,
+} from 'date-fns';
 import { IGitHubProject, IItem } from '../model/GitProjectModel';
 
 const differenceDaysOpen = (data: any): Array<IItem> => {
@@ -17,7 +23,11 @@ const differenceDaysOpen = (data: any): Array<IItem> => {
 
             items.push({
                 differenceDays,
-                created_at: createIssueDate,
+                created_at: new Date(
+                    getYear(createIssueDate),
+                    getMonth(createIssueDate),
+                    getDay(createIssueDate),
+                ),
                 year: getYear(createIssueDate),
                 month: getMonth(createIssueDate) + 1,
                 issueId: value.id,
