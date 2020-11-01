@@ -9,6 +9,6 @@
  */
 
 export interface ILineChart {
-    year: string;
-    issues: number;
+    x: string;
+    y: number;
 }

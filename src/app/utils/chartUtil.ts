@@ -13,7 +13,7 @@ const alongTime = async (data: Array<IItem>): Promise<Array<ILineChart>> => {
     for (const year in agrupados) {
         // eslint-disable-next-line no-console
         // console.log(year, agrupados[year].length);
-        lineCharts.push({ year, issues: agrupados[year].length });
+        lineCharts.push({ x: year, y: agrupados[year].length });
     }
 
     return lineCharts;
@@ -37,7 +37,7 @@ const dayOverDay = async (
     for (const date in reduzidos) {
         // eslint-disable-next-line no-console
         // console.log(year, agrupados[year].length);
-        lineCharts.push({ year: date, issues: reduzidos[date].length });
+        lineCharts.push({ x: date, y: reduzidos[date].length });
     }
     return lineCharts;
 };
