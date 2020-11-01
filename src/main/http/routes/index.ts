@@ -1,8 +1,10 @@
 import { Router } from 'express';
-import controller from '@controllers/SearchRepositoryController';
+import SearchRepositoryController from '@controllers/SearchRepositoryController';
+import LinearChartController from '@controllers/LinearChartController';
 
 const routes = Router();
 
-routes.post('/search', controller.index);
+routes.post('/search', SearchRepositoryController.index);
+routes.get('/statistic/chart', LinearChartController.index);
 
 export default routes;

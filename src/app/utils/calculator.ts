@@ -1,5 +1,5 @@
-import { parseISO, differenceInDays } from 'date-fns';
-import { IGitHubProject, IItem } from '../model/repository';
+import { getYear, getMonth, parseISO, differenceInDays } from 'date-fns';
+import { IGitHubProject, IItem } from '../model/GitProjectModel';
 
 const differenceDaysOpen = (data: any): Array<IItem> => {
     const items: IItem[] = [];
@@ -9,12 +9,19 @@ const differenceDaysOpen = (data: any): Array<IItem> => {
         const element = data[index];
         // eslint-disable-next-line no-unused-expressions
         element.data.map((value: any) => {
+            const createIssueDate = parseISO(value.created_at);
             const differenceDays = differenceInDays(
                 new Date(),
                 parseISO(value.created_at),
             );
 
-            items.push({ differenceDays });
+            items.push({
+                differenceDays,
+                created_at: createIssueDate,
+                year: getYear(createIssueDate),
+                month: getMonth(createIssueDate) + 1,
+                issueId: value.id,
+            });
         });
     }
     return items;

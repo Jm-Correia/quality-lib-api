@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { IGitHubProject } from '../../model/repository';
+import { IGitHubProject } from '../../model/GitProjectModel';
 import api from '../../lib/api';
 import AppError from '../../error/AppError';
 import fetchIssues from '../../utils/issuesApi';
@@ -17,8 +17,9 @@ const fetchProjectGitHub = async (
             params: { q: `${projectName}` },
         });
         if (!response.data) throw new AppError('GitHub project does not found');
-        const { full_name, open_issues } = response.data.items[0];
+        const { name, full_name, open_issues } = response.data.items[0];
         return {
+            name,
             fullName: full_name,
             openIssues: open_issues,
         };
@@ -31,6 +32,7 @@ const fetchProjectGitHub = async (
 };
 
 const fetchProjectIssues = async ({
+    name,
     fullName,
     openIssues,
 }: IGitHubProject): Promise<IGitHubProject> => {
@@ -39,17 +41,20 @@ const fetchProjectIssues = async ({
 
         const items = differenceDaysOpen(await fetchIssues(pages, fullName));
         const averageDays = AverageDaysOpen({
+            name,
             fullName,
             openIssues,
             items,
         });
         const standardDeviation = standardDeviationDaysOpen({
+            name,
             fullName,
             openIssues,
             averageDays,
             items,
         });
         return {
+            name,
             fullName,
             openIssues,
             averageDays,
