@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
+import { IGitHubProject } from '../model/GitProjectModel';
 
-const GitProjectSchema = new mongoose.Schema(
+const GitProjectSchema = new mongoose.Schema<IGitHubProject>(
     {
         name: { type: String, required: true },
         fullName: { type: String, required: true },

@@ -1,4 +1,6 @@
 import { Request, Response } from 'express';
+import GitProjectRepo from '@infra/database/GItProjectRepo';
+import Gateway from '@infra/gateway/gateway';
 import AppError from '../error/AppError';
 import FetchApiGitHubService from '../services/FetchApiGitHubService';
 
@@ -7,7 +9,10 @@ class SearchRepositoryController {
         const { project } = request.body;
         if (!project) throw new AppError('Project name is required', 422);
 
-        const gitHubInfo = await new FetchApiGitHubService().execute(project);
+        const gitHubInfo = await new FetchApiGitHubService(
+            new GitProjectRepo(),
+            new Gateway(),
+        ).execute(project);
 
         return response.json(gitHubInfo);
     }

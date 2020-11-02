@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import api from '../lib/api';
+import api from '../lib/Api';
 
 const fetchIssues = async (page: number, name: string) => {
     api.defaults.headers.authorization = `token ${process.env.TOKEN}`;

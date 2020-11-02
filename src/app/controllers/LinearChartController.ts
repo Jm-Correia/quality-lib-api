@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { isValid, parseISO, isBefore } from 'date-fns';
+import GitProjectRepo from '@infra/database/GItProjectRepo';
 import StatisticLinearChartService from '../services/StatisticLinearChartService';
 import AppError from '../error/AppError';
 
@@ -20,7 +21,9 @@ class LinearChartController {
             );
         }
 
-        const lineChart = await new StatisticLinearChartService().execute({
+        const lineChart = await new StatisticLinearChartService(
+            new GitProjectRepo(),
+        ).execute({
             project,
             dateStart,
             dateEnd,

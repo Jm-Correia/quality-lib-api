@@ -1,48 +1,32 @@
-import { fetchProjectGitHub, fetchProjectIssues } from '@infra/gateway/gateway';
+import IGitHubProjectRepo from '@infra/database/interface/IGitHubProjectRepo';
+import IGatewayApiGitHub from '@infra/gateway/Interface/IGateway';
 import { IGitHubProject } from '../model/GitProjectModel';
-import FindGitProjectService from './FindGitProjectService';
-import SaveGitHubProjectService from './SaveGitHubProjectService';
-import GitProjectSchema from '../schemas/GitProject';
 
 export default class FetchApiGitHubService {
-    private readonly findGitProjectService;
+    private gitProjectRepo: IGitHubProjectRepo;
 
-    private readonly saveGitHubProjectService;
+    private gatewayApi: IGatewayApiGitHub;
 
-    constructor() {
-        this.findGitProjectService = new FindGitProjectService();
-        this.saveGitHubProjectService = new SaveGitHubProjectService();
+    constructor(
+        gitProjectRepo: IGitHubProjectRepo,
+        gateway: IGatewayApiGitHub,
+    ) {
+        this.gitProjectRepo = gitProjectRepo;
+        this.gatewayApi = gateway;
     }
 
     async execute(project: string): Promise<IGitHubProject> {
-        const gitProject = await GitProjectSchema.findOne({
-            name: project,
-        });
-
-        if (gitProject) {
-            const {
-                name,
-                fullName,
-                openIssues,
-                averageDays,
-                standardDeviation,
-                items,
-            }: any = gitProject;
-            return {
-                name,
-                fullName,
-                openIssues,
-                averageDays,
-                standardDeviation,
-                items,
-            };
-        }
-
-        const gitHubInfo: IGitHubProject = await fetchProjectIssues(
-            await fetchProjectGitHub(project),
+        const isGitHubProjectRepo = await this.gitProjectRepo.findOneByName(
+            project,
         );
 
-        this.saveGitHubProjectService.execute(gitHubInfo);
+        if (isGitHubProjectRepo) return isGitHubProjectRepo;
+
+        const gitHubInfo = await this.gatewayApi.fetchProjectIssues(
+            await this.gatewayApi.fetchProjectGitHub(project),
+        );
+
+        this.gitProjectRepo.create(gitHubInfo);
 
         return gitHubInfo;
     }

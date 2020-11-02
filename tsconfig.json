@@ -33,15 +33,15 @@
                 "app/controllers/*"
             ],
             "@main/*": [
-                "/main/*"
+                "main/*"
             ],
             "@infra/*": [
                 "app/infra/*"
             ],
             "@config/*": [
-                "/config/*"
+                "config/*"
             ],
-            "@lib": [
+            "@lib/*": [
                 "app/lib/*"
             ]
         }

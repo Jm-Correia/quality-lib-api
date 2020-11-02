@@ -7,13 +7,13 @@ import Util from './Utils.js';
 const alongTime = async (data: Array<IItem>): Promise<Array<ILineChart>> => {
     const items = data.reverse();
     const lineCharts: Array<ILineChart> = [];
-    const agrupados = Util(items, 'year');
+    const grouper = Util(items, 'year');
     // eslint-disable-next-line no-restricted-syntax
     // eslint-disable-next-line guard-for-in
-    for (const year in agrupados) {
+    for (const year in grouper) {
         // eslint-disable-next-line no-console
         // console.log(year, agrupados[year].length);
-        lineCharts.push({ x: year, y: agrupados[year].length });
+        lineCharts.push({ x: year, y: grouper[year].length });
     }
 
     return lineCharts;
