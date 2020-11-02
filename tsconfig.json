@@ -14,7 +14,7 @@
         "removeComments": true,
         "strict": true,
         "resolveJsonModule": true,
-        "moduleResolution": "Node",
+        "moduleResolution": "node",
         "esModuleInterop": true,
         "noImplicitAny": true,
         "skipDefaultLibCheck": true,

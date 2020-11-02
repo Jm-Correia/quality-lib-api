@@ -14,8 +14,13 @@ class SearchRepositoryController {
             new GitProjectRepo(),
             new Gateway(new GitHubApi()),
         ).execute(project);
-
-        return response.json(gitHubInfo);
+        const { name, openIssues, averageDays, standardDeviation } = gitHubInfo;
+        return response.json({
+            name,
+            openIssues,
+            averageDays,
+            standardDeviation,
+        });
     }
 }
 

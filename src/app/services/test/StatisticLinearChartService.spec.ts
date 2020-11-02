@@ -25,6 +25,8 @@ describe('LineChart Information ', () => {
         });
 
         expect(lineChart.length).toBe(1);
+        expect(lineChart[0].x).toBe('2020');
+        expect(lineChart[0].y).toBe(100);
     });
     it('should be able to return dates for create chart day over Day', async () => {
         await new FetchApiGitHubService(repo, new Gateway(api)).execute('vue');
