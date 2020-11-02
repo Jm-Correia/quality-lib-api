@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { IGitHubProject } from '../../../model/GitProjectModel';
 import IGitHubProjectRepo from '../interface/IGitHubProjectRepo';
 
-export default class GitProjectRepo implements IGitHubProjectRepo {
+class GitProjectRepoStub implements IGitHubProjectRepo {
     private projects: IGitHubProject[] = [];
 
     async create(data: IGitHubProject): Promise<void> {
@@ -57,3 +57,5 @@ export default class GitProjectRepo implements IGitHubProjectRepo {
         return null;
     }
 }
+
+export default new GitProjectRepoStub();

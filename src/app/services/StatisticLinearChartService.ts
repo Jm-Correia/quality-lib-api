@@ -5,8 +5,8 @@ import { alongTime, dayOverDay } from '../utils/chartUtil';
 
 interface IQueries {
     project: string;
-    dateStart?: Date;
-    dateEnd?: Date;
+    dateStart?: string;
+    dateEnd?: string;
 }
 
 export default class StatisticLinearChartService {

@@ -3,6 +3,7 @@ import GitProjectRepo from '@infra/database/GItProjectRepo';
 import Gateway from '@infra/gateway/gateway';
 import AppError from '../error/AppError';
 import FetchApiGitHubService from '../services/FetchApiGitHubService';
+import GitHubApi from '../lib/GitHubApi';
 
 class SearchRepositoryController {
     async index(request: Request, response: Response): Promise<Response> {
@@ -11,7 +12,7 @@ class SearchRepositoryController {
 
         const gitHubInfo = await new FetchApiGitHubService(
             new GitProjectRepo(),
-            new Gateway(),
+            new Gateway(new GitHubApi()),
         ).execute(project);
 
         return response.json(gitHubInfo);

@@ -3,16 +3,16 @@
         "transpileOnly": true
     },
     "compilerOptions": {
-        "target": "es2017", /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', or 'ESNEXT'. */
+        "target": "es2017",
         "module": "commonjs",
         "lib": [
             "ES6"
         ],
-        "allowJs": true, /* Allow javascript files to be compiled. */
-        "outDir": "./dist", /* Redirect output structure to the directory. */
-        "rootDir": "./src", /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
-        "removeComments": true, /* Do not emit comments to output. */
-        "strict": true, /* Enable all strict type-checking options. */
+        "allowJs": true,
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "removeComments": true,
+        "strict": true,
         "resolveJsonModule": true,
         "moduleResolution": "Node",
         "esModuleInterop": true,
@@ -27,7 +27,7 @@
             "./node_modules/@types",
             "./src/@types"
         ],
-        "baseUrl": "./src/", /* List of folders to include type definitions from. */
+        "baseUrl": "./src/",
         "paths": {
             "@controllers/*": [
                 "app/controllers/*"
@@ -40,9 +40,6 @@
             ],
             "@config/*": [
                 "config/*"
-            ],
-            "@lib/*": [
-                "app/lib/*"
             ]
         }
     }

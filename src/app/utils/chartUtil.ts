@@ -21,13 +21,13 @@ const alongTime = async (data: Array<IItem>): Promise<Array<ILineChart>> => {
 
 const dayOverDay = async (
     data: Array<IItem>,
-    dateStart,
-    dateEnd,
+    dateStart: string,
+    dateEnd: string,
 ): Promise<Array<ILineChart>> => {
     const lineCharts: Array<ILineChart> = [];
     const dtStart = parseISO(dateStart);
     const dtEnd = parseISO(dateEnd);
-    const filterBetweenDates = value => {
+    const filterBetweenDates = (value: any) => {
         return value.created_at >= dtStart && value.created_at <= dtEnd;
     };
     const items = data.filter(filterBetweenDates).reverse();
