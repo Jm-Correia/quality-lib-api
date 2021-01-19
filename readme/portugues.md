@@ -86,7 +86,7 @@
 >```
 >
 >#### Diagrama com a Arquitetura:
-> ![Diagrama](./assets/diagrama.png)
+> ![Diagrama](../assets/diagrama.png)
 
 ### Banco de Dados:
 > Para este mvp foi utilizado o mongoDb pelo fato dele ser simples de se trabalhar com os dados que serão retornados pela api do github e pela flexibilidade em poder armazenar tudo em uma única coleção.
