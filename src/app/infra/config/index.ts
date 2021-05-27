@@ -12,6 +12,7 @@ class DataBase {
         this.mongoConnection = await mongoose.connect(
             `${process.env.MONGO_URL}`,
             {
+                useUnifiedTopology: true,
                 useNewUrlParser: true,
             },
         );

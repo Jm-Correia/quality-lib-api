@@ -7,6 +7,8 @@ import GitHubApi from '../lib/GitHubApi';
 
 class SearchRepositoryController {
     async index(request: Request, response: Response): Promise<Response> {
+        response.header('Access-Control-Allow-Origin', '*');
+
         const { project } = request.body;
         if (!project) throw new AppError('Project name is required', 422);
 
