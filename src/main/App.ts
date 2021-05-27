@@ -1,11 +1,13 @@
 import 'reflect-metadata';
 import 'express-async-errors';
+import cors from 'cors';
 import express, { Request, Response, NextFunction } from 'express';
 import routes from './http/routes/index';
 import AppError from '../app/error/AppError';
 import '@infra/config/index';
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(routes);
